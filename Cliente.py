@@ -1,7 +1,8 @@
 import socket
 
+import socket
+
 def conectar_ao_servidor(ip, porta):
-    
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
         client_socket.connect((ip, porta))
@@ -12,7 +13,6 @@ def conectar_ao_servidor(ip, porta):
         return None
 
 def cadastrar_conta(client_socket):
-   
     username = input("Digite um username: ")
     senha = input("Digite uma senha: ")
     nome = input("Digite seu nome completo: ")
@@ -23,7 +23,6 @@ def cadastrar_conta(client_socket):
     print(resposta)
 
 def fazer_login(client_socket):
-   
     username = input("Digite seu username: ")
     senha = input("Digite sua senha: ")
 
@@ -33,7 +32,6 @@ def fazer_login(client_socket):
     print(resposta)
 
 def enviar_email(client_socket):
-    
     de = input("De: ")
     para = input("Para: ")
     assunto = input("Assunto: ")
@@ -45,7 +43,6 @@ def enviar_email(client_socket):
     print(resposta)
 
 def receber_emails(client_socket):
-   
     username = input("Digite seu username: ")
     requisicao = f"RECEBER_EMAILS|{username}"
     client_socket.send(requisicao.encode('utf-8'))
@@ -54,8 +51,9 @@ def receber_emails(client_socket):
     print(resposta)
 
 def main():
-   
     client_socket = None
+    ip_servidor = "tassiasd.ddns.net"
+    porta_servidor = 12345
 
     while True:
         print("\n-- Menu --")
@@ -68,9 +66,7 @@ def main():
         escolha = input("Escolha uma opção: ")
 
         if escolha == "1":
-            ip = input("Digite o IP do servidor: ")
-            porta = int(input("Digite a porta do servidor: "))
-            client_socket = conectar_ao_servidor(ip, porta)
+            client_socket = conectar_ao_servidor(ip_servidor, porta_servidor)
 
         elif escolha == "2":
             if client_socket:
